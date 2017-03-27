@@ -54,7 +54,7 @@ object Main {
    1     15    97    351   769   1023  769   255   1
    */
   def ppascal(r: Int, c: Int): Int = {
-   if (r == 0 || c == 0 || c == r) 1
+   if (c == 0 || c == r) 1
    else 2 * ppascal(r - 1, c - 1) + ppascal(r - 1, c)
   }
 
