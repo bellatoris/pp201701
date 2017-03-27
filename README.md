@@ -9,7 +9,9 @@
 
 - 03/02: Lecture slide is uploaded [here](lecture.pdf).
 - Lecture on March 7th will be a practice session. Click [this](https://github.com/snu-sf-class/pp201701/issues/1) for more information
-- 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59). [Instruction for submission](HWInstruction.md)
+- 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59). [Instruction for submission](HWInstruction.md)n
+- 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For Questions, email TA.
+
 ## Assignments
 - Download skeleton code and replace `???` with your code
 - No delayed submission
