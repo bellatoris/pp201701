@@ -9,8 +9,9 @@
 
 - 03/02: Lecture slide is uploaded [here](lecture.pdf).
 - Lecture on March 7th will be a practice session. Click [this](https://github.com/snu-sf-class/pp201701/issues/1) for more information
-- 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59). [Instruction for submission](HWInstruction.md)n
-- 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For Questions, email TA.
+- 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59). [Instruction for submission](HWInstruction.md)
+- 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For questions, email TA.
+- 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59).
 
 ## Assignments
 - Download skeleton code and replace `???` with your code
@@ -19,6 +20,7 @@
 |No. | Published     | Due       	| Description                   	 	 	 	 	 	 	 	 	 	  	|
 |----|------------	|------------	|----------------------	|
 | 1 | 03/16     	|03/24 23:59    | Recursion                                                            	|
+| 2 | 03/30     	|04/07 23:59    | Algebraic Data Types                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
