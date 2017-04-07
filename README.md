@@ -12,6 +12,7 @@
 - 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59). [Instruction for submission](HWInstruction.md)
 - 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For questions, email TA.
 - 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59).
+- 04/06: Midterm Exam schedule: April 23, 2pm ~ (no time limit) [Instruction for midterm](MidInstruction.md)
 
 ## Assignments
 - Download skeleton code and replace `???` with your code
