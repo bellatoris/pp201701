@@ -1,5 +1,6 @@
 package pp201701.hw3
 import pp201701.hw3.Data.DataBundle._
+import scala.annotation.tailrec
 
 /*
  * ** The submitted code should be runnable. Before upload, you MUST check it
@@ -36,12 +37,26 @@ object Main {
 
   def emptyStk[A] = MyNil[A]()
 
-  def push[A](stk: Stack[A])(a: A): Stack[A] = ??? // stk
+  def push[A](stk: Stack[A])(a: A): Stack[A] = {
+    MyCons[A](a, stk)
+  }
 
-  def pop[A](stk: Stack[A]): Option[(A, Stack[A])] = ??? // stk
+  def pop[A](stk: Stack[A]): Option[(A, Stack[A])] = stk match {
+    case MyNil() => None
+    case MyCons(hd, tl) => Some(hd, tl)
+  }
 
+  // push as's elements to seed stack
+  // maybe for test...
   def pushList[A](seed: Stack[A])(as: List[A]): Stack[A] =
      as.foldLeft(seed)((stk, a) => push(stk)(a))
+
+   
+   @tailrec
+   def pushMyList[A](seed: Stack[A])(as: MyList[A]): Stack[A] = as match {
+     case MyNil() => seed
+     case MyCons(hd, tl) => pushMyList(push(seed)(hd))(tl)
+   }
 
   /*
    Queue can be implemented using two stacks, efficiently.
@@ -54,12 +69,26 @@ object Main {
    */
   def emptyQ[A] = (emptyStk[A], emptyStk[A])
 
-  def enQ[A](q: Queue[A])(a: A): Queue[A] = ??? // q
+  def enQ[A](q: Queue[A])(a: A): Queue[A] = {
+    val (stk1, stk2) = q
+    (push[A](stk1)(a), stk2)
+  }
 
+  // push as's element to seed queue
   def enQList[A](seed: Queue[A])(as: List[A]): Queue[A] =
      as.foldLeft(seed)((q, a) => enQ(q)(a))
 
-  def deQ[A](q: Queue[A]): Option[(A, Queue[A])] = ??? // None
+  def deQ[A](q: Queue[A]): Option[(A, Queue[A])] = q match {
+    case (MyNil(), MyNil()) => None
+    case (MyCons(hd, tl), MyNil()) => {
+      val newSecondStack = pushMyList[A](MyNil[A]())(MyCons[A](hd, tl))
+      val (dequeuedValue, secondStack) = pop[A](newSecondStack).get
+      Some(dequeuedValue, (MyNil[A](), secondStack))
+    }
+    case (firstStack, MyCons(hd, tl)) => {
+      Some(hd, (firstStack, tl))
+    }
+  }
 
   /*
    Exercise 2: Binary Search Tree
@@ -85,13 +114,27 @@ object Main {
   def emptyBST[K, V]: BSTree[K, V] = Leaf()
 
   def insert[K, V]
-    (t: BSTree[K, V])(keyValue: (K, V))(cmp: K => K => Int): BSTree[K, V] = ??? // emptyBST
+    (t: BSTree[K, V])(keyValue: (K, V))(cmp: K => K => Int): BSTree[K, V] = t match {
+     case Leaf() => Node[(K, V)](keyValue, Leaf[(K, V)](), Leaf[(K, V)]())
+     case Node((key, value), left, right) => {
+       if (cmp(keyValue._1)(key) == 0) Node[(K, V)](keyValue, left, right)
+       else if (cmp(keyValue._1)(key) > 0) Node[(K, V)]((key, value), left, insert[K, V](right)(keyValue)(cmp))
+       else Node[(K, V)]((key, value), insert[K, V](left)(keyValue)(cmp), right)
+     }
+  }
 
   def insertList[K, V]
     (seed: BSTree[K, V])(keyValues: List[(K, V)])(cmp: K => K => Int) =
     keyValues.foldLeft(seed)((tree, keyValue) => insert(tree)(keyValue)(cmp))
 
-  def lookup[K, V](t: BSTree[K, V])(key: K)(cmp: K => K => Int): Option[V] = ??? // None
+  def lookup[K, V](t: BSTree[K, V])(key: K)(cmp: K => K => Int): Option[V] = t match {
+    case Leaf() => None
+    case Node((storedKey, value), left, right) => {
+      if (cmp(key)(storedKey) == 0) Some(value)
+      else if (cmp(key)(storedKey) > 0) lookup[K, V](right)(key)(cmp)
+      else lookup[K, V](left)(key)(cmp)
+    }
+  }
 
   /*
    Exercise 3: Structural Sub Type
@@ -106,6 +149,7 @@ object Main {
   class MyClass[A,B,C,D,E,F]() {
     type Func1 = { val a: A } => { val b: B }
     type Func2 = { val b: B } => { val a: A }
+    type Func3 = { } => { val a: A; val b: B }
 
     type Ty1 = {
       def apply: { val func: Func1 ; val c: C } => { val b: B ; val d: D }
@@ -123,13 +167,21 @@ object Main {
      Find suitable common supertype of Ty1 and Ty2,
      and replace "Any" with that type.
      */
-    type CommonTy = Any // Any
+    type CommonTy = {
+      def apply: { val func: Func3; val c: C; val e: E } => { val b: B }
+      val a: A
+    }
 
     /*
      Fill in the apply function here.
      The answer should be in this form: x.apply(...)
      */
-    def apply(x: CommonTy, _a: A, _b: B, _c: C, _d: D, _e: E, _f: F) =
-      ??? //0
+    def apply(x: CommonTy, _a: A, _b: B, _c: C, _d: D, _e: E, _f: F) = {
+      x.apply(new {
+        val func: Func3 = input => new { val a: A = _a; val b: B = _b }
+        val c: C = _c
+        val e: E = _e
+      })
+    }
   }
 }

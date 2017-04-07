@@ -6,6 +6,11 @@ object Test extends App {
   def print_result(b:Boolean) : Unit =
     if (b) println("O") else println("X")
 
+  def printIList(xs: IList): Unit = xs match {
+    case INil() => print("end") 
+    case ICons(v, t) => print(v + " ");  printIList(t)
+  }
+
   def listIntToIList(xs: List[Int]): IList =
     xs match {
       case (h :: t) => ICons(h, listIntToIList(t))
