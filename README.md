@@ -13,6 +13,7 @@
 - 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For questions, email TA.
 - 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59).
 - 04/06: Midterm Exam schedule: April 23, 2pm ~ (no time limit) [Instruction for midterm](MidInstruction.md)
+- 04/07: [HW3](assignments/hw3) is out. (Due date: 4/14(FRI) 23:59).
 
 ## Assignments
 - Download skeleton code and replace `???` with your code
@@ -22,6 +23,7 @@
 |----|------------	|------------	|----------------------	|
 | 1 | 03/16     	|03/24 23:59    | Recursion                                                            	|
 | 2 | 03/30     	|04/07 23:59    | Algebraic Data Types                                                            	|
+| 3 | 04/07     	|04/14 23:59    | Polymorphism                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
