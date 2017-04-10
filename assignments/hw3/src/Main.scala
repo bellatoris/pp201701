@@ -53,9 +53,12 @@ object Main {
 
    
    @tailrec
-   def pushMyList[A](seed: Stack[A])(as: MyList[A]): Stack[A] = as match {
-     case MyNil() => seed
-     case MyCons(hd, tl) => pushMyList(push(seed)(hd))(tl)
+   def popAndPush[A](seed: Stack[A])(as: Stack[A]): Stack[A] = {
+     val pair = pop(as)
+     pair match {
+       case None => seed
+       case Some((hd, tl)) => popAndPush(push(seed)(hd))(tl)
+     }
    }
 
   /*
@@ -71,7 +74,7 @@ object Main {
 
   def enQ[A](q: Queue[A])(a: A): Queue[A] = {
     val (stk1, stk2) = q
-    (push[A](stk1)(a), stk2)
+    (push(stk1)(a), stk2)
   }
 
   // push as's element to seed queue
@@ -81,9 +84,10 @@ object Main {
   def deQ[A](q: Queue[A]): Option[(A, Queue[A])] = q match {
     case (MyNil(), MyNil()) => None
     case (MyCons(hd, tl), MyNil()) => {
-      val newSecondStack = pushMyList[A](MyNil[A]())(MyCons[A](hd, tl))
-      val (dequeuedValue, secondStack) = pop[A](newSecondStack).get
-      Some(dequeuedValue, (MyNil[A](), secondStack))
+      // if second stack has no element, merge first and second stacks.
+      val newSecondStack = popAndPush(MyNil())(MyCons(hd, tl))
+      val (dequeuedValue, secondStack) = pop(newSecondStack).get
+      Some(dequeuedValue, (MyNil(), secondStack))
     }
     case (firstStack, MyCons(hd, tl)) => {
       Some(hd, (firstStack, tl))
@@ -115,11 +119,14 @@ object Main {
 
   def insert[K, V]
     (t: BSTree[K, V])(keyValue: (K, V))(cmp: K => K => Int): BSTree[K, V] = t match {
-     case Leaf() => Node[(K, V)](keyValue, Leaf[(K, V)](), Leaf[(K, V)]())
+     case Leaf() => Node(keyValue, Leaf(), Leaf())
      case Node((key, value), left, right) => {
-       if (cmp(keyValue._1)(key) == 0) Node[(K, V)](keyValue, left, right)
-       else if (cmp(keyValue._1)(key) > 0) Node[(K, V)]((key, value), left, insert[K, V](right)(keyValue)(cmp))
-       else Node[(K, V)]((key, value), insert[K, V](left)(keyValue)(cmp), right)
+       if (cmp(keyValue._1)(key) == 0) 
+         Node(keyValue, left, right)
+       else if (cmp(keyValue._1)(key) > 0) 
+         Node((key, value), left, insert(right)(keyValue)(cmp))
+       else 
+         Node((key, value), insert(left)(keyValue)(cmp), right)
      }
   }
 
@@ -131,8 +138,8 @@ object Main {
     case Leaf() => None
     case Node((storedKey, value), left, right) => {
       if (cmp(key)(storedKey) == 0) Some(value)
-      else if (cmp(key)(storedKey) > 0) lookup[K, V](right)(key)(cmp)
-      else lookup[K, V](left)(key)(cmp)
+      else if (cmp(key)(storedKey) > 0) lookup(right)(key)(cmp)
+      else lookup(left)(key)(cmp)
     }
   }
 
@@ -149,6 +156,8 @@ object Main {
   class MyClass[A,B,C,D,E,F]() {
     type Func1 = { val a: A } => { val b: B }
     type Func2 = { val b: B } => { val a: A }
+
+    // Func3 is subtype of Func1 and Func2
     type Func3 = { } => { val a: A; val b: B }
 
     type Ty1 = {
