@@ -20,7 +20,7 @@
 - Download skeleton code and replace `???` with your code
 - No delayed submission
 - The score is automatically uncovered right after the due date.
-- Claims: within 2 weeks after the due date, please.
+- Claims: within 2 weeks from the due date, please.
 
 |No. | Published     | Due       	| Description                   	 	 	 	 	 	 	 	 	 	  	|
 |----|------------	|------------	|----------------------	|
