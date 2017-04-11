@@ -14,10 +14,13 @@
 - 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59).
 - 04/06: Midterm Exam schedule: April 23, 2pm ~ (no time limit) [Instruction for midterm](MidInstruction.md)
 - 04/07: [HW3](assignments/hw3) is out. (Due date: 4/14(FRI) 23:59).
+- 04/11: [HW2 solution](assignments-sol/hw2) is available.
 
 ## Assignments
 - Download skeleton code and replace `???` with your code
 - No delayed submission
+- The score is automatically uncovered right after the due date.
+- Claims: within 2 weeks from the due date, please.
 
 |No. | Published     | Due       	| Description                   	 	 	 	 	 	 	 	 	 	  	|
 |----|------------	|------------	|----------------------	|
