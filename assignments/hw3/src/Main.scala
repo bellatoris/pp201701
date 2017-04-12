@@ -187,7 +187,7 @@ object Main {
      */
     def apply(x: CommonTy, _a: A, _b: B, _c: C, _d: D, _e: E, _f: F) = {
       x.apply(new {
-        val func: Func3 = input => new { val a: A = _a; val b: B = _b }
+        val func: Func3 = (input: {}) => new { val a: A = _a; val b: B = _b }
         val c: C = _c
         val e: E = _e
       })

@@ -73,6 +73,38 @@ object Test extends App {
         case _ => false
       }
     )
+
+    def printTree[V](tree: BSTree[Int, V]): Unit = tree match {
+      case Leaf() => 
+      case Node((key, value), left, right) => {
+        printTree(left)
+        println(key)
+        printTree(right)
+      }
+    }
+
+    val keyValueList = (0 until 10).toList.reverse.zipWithIndex
+    val myTree = insertList[Int, Int](emptyIntIntBST)(keyValueList)(cmp)
+
+    printTree[Int](myTree)
+
+    for {
+      i <- 0 until 10
+    } {
+      print_result(
+        lookup(myTree)(i)(cmp) match {
+          case Some(n) => n == 9 - i
+          case _ => false
+        }
+      )
+    }
+
+    print_result(
+      lookup(myTree)(10)(cmp) match {
+        case Some(n) => false
+        case None => true
+      }
+    )
   }
 
   // Problem 3
