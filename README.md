@@ -17,6 +17,7 @@
 - 04/11: [HW2 solution](assignments-sol/hw2) is available.
 - 04/18: Class on Thursday(04/20) is a QnA session for midterm.
 - 04/18: Midterm coverage: until 'Structural subtypes' [Instruction for midterm](MidInstruction.md)
+- 04/18: [HW3 solution](assignments-sol/hw3) is available.
 
 ## Assignments
 - Download skeleton code and replace `???` with your code
