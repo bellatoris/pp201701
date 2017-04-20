@@ -12,3 +12,7 @@
   + Though, you can use any other editors you want.
   + We will provide shell scripts for compiling and testing your code.
 - Your seat in the exam place will be randomly decided.
+
+- Some of the midterm problems are based on homework problems. (They are not the exact same.)
+  + The purpose is to check your understanding of homework problems.
+  + Your score for a homework problem will get deducted, according to your answer for the corresponding midterm problem.
