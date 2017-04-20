@@ -15,6 +15,9 @@
 - 04/06: Midterm Exam schedule: April 23, 2pm ~ (no time limit) [Instruction for midterm](MidInstruction.md)
 - 04/07: [HW3](assignments/hw3) is out. (Due date: 4/14(FRI) 23:59).
 - 04/11: [HW2 solution](assignments-sol/hw2) is available.
+- 04/18: Class on Thursday(04/20) is a QnA session for midterm.
+- 04/18: Midterm coverage: until 'Structural subtypes' [Instruction for midterm](MidInstruction.md)
+- 04/18: [HW3 solution](assignments-sol/hw3) is available.
 
 ## Assignments
 - Download skeleton code and replace `???` with your code
