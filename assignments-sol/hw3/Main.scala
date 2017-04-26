@@ -72,7 +72,10 @@ object Main {
     pop(q._2) match {
       case None =>
         { val q2 = moveQ(q._1, q._2)
-          deQ(q2)
+          pop(q2._2) match {
+            case None => None
+            case Some ((a, t)) => Some (a, (q2._1, t))
+          }
         }
       case Some ((a, t)) => Some (a, (q._1, t))
     }
