@@ -21,6 +21,7 @@
 - 04/20: [Instruction for midterm](MidInstruction.md) updated. More description of problems added.
 - 04/25: [HW3 solution](assignments-sol/hw3) is revised, thanks to a student's report.
 - 04/25: Lectures canceled on these days: [4/27(Thu), 5/9(Tue), 5/16(Tue), 5/18(Thu)]
+- 04/27: [HW4](assignments/hw4) is out. (Due date: 5/5(FRI) 23:59).
 
 ##  Lecture slide updates (since 04/20)
 
@@ -41,6 +42,7 @@
 | 1 | 03/16     	|03/24 23:59    | Recursion                                                            	|
 | 2 | 03/30     	|04/07 23:59    | Algebraic Data Types                                                            	|
 | 3 | 04/07     	|04/14 23:59    | Polymorphism                                                            	|
+| 4 | 04/27     	|05/05 23:59    | Abstract classes                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
