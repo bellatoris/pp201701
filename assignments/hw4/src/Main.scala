@@ -37,25 +37,38 @@ object Main {
   object Problem1 {
     object IterDictImpl {
       //Write empty IterDict
-      def empty[K, V](eqFunc: K => K => Boolean): IterDict[K, V] = ??? // null
+      def empty[K, V](eqFunc: K => K => Boolean): IterDict[K, V] = new IterDictImpl(eqFunc)(Nil)
     }
 
     class IterDictImpl[K, V](eqFunc: K => K => Boolean)(val data: List[(K, V)])
         extends IterDict[K, V] {
 
-      def getValue = ??? // None
-
-      def getNext = ??? // null
+      def getValue = data.headOption 
+      def getNext = data match {
+        case Nil => this
+        case hd :: tail => new IterDictImpl(eqFunc)(tail)
+      }
 
       // When the given key already exists in this dictionary, overwrite the value.
-      def add(k: K, v: V) : IterDict[K, V] = ??? // null
+      def add(k: K, v: V) : IterDict[K, V] = new IterDictImpl(eqFunc)((k, v) :: data)
 
       // Return the associated value with the key. When there is no such key, return None.
-      def find(k: K) : Option[V] = ??? // None
+      def find(k: K) : Option[V] = {
+        def nestedFind(list: List[(K, V)]): Option[V] = list match {
+          case Nil => None
+          case (key, value) :: tail => 
+            if (eqFunc(k)(key)) Some(value) 
+            else nestedFind(tail)
+        }
+        nestedFind(data)
+      }
     }
 
     // Write a function that iterates through given iterator and sum it.
-    def sumElements[K](xs: Iter[(K, Int)]): Int = ??? // 0
+    def sumElements[K](xs: Iter[(K, Int)]): Int = xs.getValue match {
+      case None => 0
+      case Some(kv) => kv._2 + sumElements(xs.getNext)
+    }
   }
 
   // Problem 2
@@ -87,21 +100,62 @@ object Main {
 
      You may create your own classes for this exercise.
      */
+
+     // head <------ value ------> tail
+    class ListBiIter[A](val head: List[A], 
+                        val value: Option[A], 
+                        val tail: List[A]) extends BiIter[A] {
+      def getValue = value
+
+      def getNext = tail match {
+        case Nil => value match {
+          case None => this
+          case Some(v) => new ListBiIter(v :: head, None, tail)
+        }
+        case hd :: tl => value match {
+          case None => new ListBiIter(head, Some(hd), tl)
+          case Some(v) => new ListBiIter(v :: head, Some(hd), tl)
+        }
+      }
+
+      def getPrev = head match {
+        case Nil => value match {
+          case None => this
+          case Some(v) => new ListBiIter(head, None, v :: tail)
+        }
+        case hd :: tl => value match {
+          case None => new ListBiIter(tl, Some(hd), tail)
+          case Some(v) => new ListBiIter(tl, Some(hd), v :: tail)
+        }
+      }
+
+      def getList = value match {
+        case None => head.reverse ++ tail
+        case Some(v) => head.reverse ++ (v :: tail)
+      }
+
+      def prepend(biList: ListBiIter[A]) = new ListBiIter(head, value, tail ++ biList.getList)
+    }
+
     class BiIterableList[A](val data: List[A]) extends BiIterable[A] {
-      def biIter: BiIter[A] = ??? // null
+      def biIter: BiIter[A] = data match {
+        case Nil => new ListBiIter(Nil, None, Nil)
+        case hd :: tl => new ListBiIter(Nil, Some(hd), tl)
+      }
     }
 
     sealed abstract class BiIterableTree[A] extends BiIterable[A] {
       // You can write something here
+      override def biIter: ListBiIter[A]
     }
 
     case class Empty[A]() extends BiIterableTree[A] {
-      def biIter = ??? // null
+      def biIter = new ListBiIter(Nil, None, Nil)
     }
 
     case class Node[A](value: A, left: BiIterableTree[A], right: BiIterableTree[A])
         extends BiIterableTree[A] {
-      def biIter = ??? // null
+      def biIter = new ListBiIter(Nil, Some(value), left.biIter.prepend(right.biIter).getList)
     }
   }
 
