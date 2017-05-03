@@ -22,6 +22,7 @@
 - 04/25: [HW3 solution](assignments-sol/hw3) is revised, thanks to a student's report.
 - 04/25: Lectures canceled on these days: [4/27(Thu), 5/9(Tue), 5/16(Tue), 5/18(Thu)]
 - 04/27: [HW4](assignments/hw4) is out. (Due date: 5/5(FRI) 23:59).
+- 05/03: [HW4](assignments/hw4) has changed little: the type of IterDictImpl.empty is changed from IterDict[K,V] to IterDictImpl[K,V]. (This is just for clarification. Not necessary to apply this to your homework, if you are already done without problems.)
 
 ##  Lecture slide updates (since 04/20)
 
@@ -29,6 +30,7 @@
 |----|------------	|
 | 1 | 04/20     	|
 | 2 | 04/25     	|
+| 3 | 05/02     	|
 | - | -             |
 
 ## Assignments
