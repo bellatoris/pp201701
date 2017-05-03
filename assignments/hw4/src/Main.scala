@@ -37,7 +37,7 @@ object Main {
   object Problem1 {
     object IterDictImpl {
       //Write empty IterDict
-      def empty[K, V](eqFunc: K => K => Boolean): IterDict[K, V] = ??? // null
+      def empty[K, V](eqFunc: K => K => Boolean): IterDictImpl[K, V] = ??? // null
     }
 
     class IterDictImpl[K, V](eqFunc: K => K => Boolean)(val data: List[(K, V)])
