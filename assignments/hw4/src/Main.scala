@@ -50,8 +50,8 @@ object Main {
       }
 
       // When the given key already exists in this dictionary, overwrite the value.
-      def add(k: K, v: V) : IterDict[K, V] = new IterDictImpl(eqFunc)((k, v) :: data)
-
+      def add(k: K, v: V) : IterDict[K, V] = new IterDictImpl(eqFunc)((k, v) :: (data.filter(x => x._1 != k)))
+      
       // Return the associated value with the key. When there is no such key, return None.
       def find(k: K) : Option[V] = {
         def nestedFind(list: List[(K, V)]): Option[V] = list match {
@@ -129,12 +129,12 @@ object Main {
         }
       }
 
-      def getList = value match {
+      def getList: List[A] = value match {
         case None => head.reverse ++ tail
         case Some(v) => head.reverse ++ (v :: tail)
       }
 
-      def prepend(biList: ListBiIter[A]) = new ListBiIter(head, value, tail ++ biList.getList)
+      def append(biList: ListBiIter[A]) = new ListBiIter(head, value, tail ++ biList.getList)
     }
 
     class BiIterableList[A](val data: List[A]) extends BiIterable[A] {
@@ -155,7 +155,7 @@ object Main {
 
     case class Node[A](value: A, left: BiIterableTree[A], right: BiIterableTree[A])
         extends BiIterableTree[A] {
-      def biIter = new ListBiIter(Nil, Some(value), left.biIter.prepend(right.biIter).getList)
+      def biIter = new ListBiIter(Nil, Some(value), left.biIter.append(right.biIter).getList)
     }
   }
 
