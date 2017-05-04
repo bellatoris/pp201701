@@ -26,6 +26,9 @@ object Test extends App {
     val d2 = d1.add(1, 3)
     println(d2.find(1))
     println(sumElements(d2))
+
+    val d3 = d2.add(2, 4).add(3, 6).add(4, 8).add(5, 10)
+    println(sumElements(d3))
   }
 
   // Problem 2
