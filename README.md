@@ -23,7 +23,7 @@
 - 04/25: Lectures canceled on these days: [4/27(Thu), 5/9(Tue), 5/16(Tue), 5/18(Thu)]
 - 04/27: [HW4](assignments/hw4) is out. (Due date: 5/5(FRI) 23:59).
 - 05/03: [HW4](assignments/hw4) has changed little: the type of IterDictImpl.empty is changed from IterDict[K,V] to IterDictImpl[K,V]. (This is just for clarification. Not necessary to apply this to your homework, if you are already done without problems.)
-- 05/10: Check the tentative [midterm result](http://147.46.219.145:8102). Your point can be reduced further (especially for problem3 and problem 5, after manual checking).
+- 05/10: Check the tentative [midterm result](http://147.46.219.145:8102) and also [additional reduction](https://github.com/snu-sf-class/pp201701/issues/45) (especially for problem3 and problem 5, after manual checking).
 
 ##  Lecture slide updates (since 04/20)
 
