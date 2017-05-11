@@ -9,11 +9,11 @@
 
 - 03/02: Lecture slide is uploaded [here](lecture.pdf).
 - Lecture on March 7th will be a practice session. Click [this](https://github.com/snu-sf-class/pp201701/issues/1) for more information
-- 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59). [Instruction for submission](HWInstruction.md)
+- 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59) [Instruction for submission](HWInstruction.md)
 - 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For questions, email TA.
-- 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59).
+- 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59)
 - 04/06: Midterm Exam schedule: April 23, 2pm ~ (no time limit) [Instruction for midterm](MidInstruction.md)
-- 04/07: [HW3](assignments/hw3) is out. (Due date: 4/14(FRI) 23:59).
+- 04/07: [HW3](assignments/hw3) is out. (Due date: 4/14(FRI) 23:59)
 - 04/11: [HW2 solution](assignments-sol/hw2) is available.
 - 04/18: Class on Thursday(04/20) is a QnA session for midterm.
 - 04/18: Midterm coverage: until 'Structural subtypes' [Instruction for midterm](MidInstruction.md)
@@ -21,10 +21,11 @@
 - 04/20: [Instruction for midterm](MidInstruction.md) updated. More description of problems added.
 - 04/25: [HW3 solution](assignments-sol/hw3) is revised, thanks to a student's report.
 - 04/25: Lectures canceled on these days: [4/27(Thu), 5/9(Tue), 5/16(Tue), 5/18(Thu)]
-- 04/27: [HW4](assignments/hw4) is out. (Due date: 5/5(FRI) 23:59).
+- 04/27: [HW4](assignments/hw4) is out. (Due date: 5/5(FRI) 23:59)
 - 05/03: [HW4](assignments/hw4) has changed little: the type of IterDictImpl.empty is changed from IterDict[K,V] to IterDictImpl[K,V]. (This is just for clarification. Not necessary to apply this to your homework, if you are already done without problems.)
 - 05/10: ~~Check the tentative [midterm result](http://147.46.219.145:8102) and also [additional reduction](https://github.com/snu-sf-class/pp201701/issues/45) (especially for problem3 and problem 5, after manual checking).~~
 - 05/11: We found an error on the grading system. Currently it doesn't select the recent submission. We are working on fixing the bug.
+- 05/11: [HW5](assignments/hw5) is out. (Due date: 5/19(FRI) 23:59)
 
 ##  Lecture slide updates (since 04/20)
 
@@ -48,6 +49,7 @@
 | 2 | 03/30     	|04/07 23:59    | Algebraic Data Types                                                            	|
 | 3 | 04/07     	|04/14 23:59    | Polymorphism                                                            	|
 | 4 | 04/27     	|05/05 23:59    | Abstract classes                                                            	|
+| 5 | 05/11     	|05/19 23:59    | Trait Mixin                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
