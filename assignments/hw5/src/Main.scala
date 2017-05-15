@@ -6,11 +6,15 @@ object Main extends App {
    Implement traits for complex number addition/multiplication.
    */
   trait ComplexNumberAdd extends ComplexNumberSpec {
-    def add(that: ComplexNumberSpec): ComplexNumberSpec = ???
+    def add(that: ComplexNumberSpec): ComplexNumberSpec = {
+      makeRectangular(real + that.real, imaginary + that.imaginary)
+    }
   }
 
   trait ComplexNumberMult extends ComplexNumberSpec {
-    def mult(that: ComplexNumberSpec): ComplexNumberSpec = ???
+    def mult(that: ComplexNumberSpec): ComplexNumberSpec = {
+      makeRectangular(real * that.real - imaginary * that.imaginary, real * that.imaginary + that.real * imaginary)
+    }
   }
 
   /*
@@ -28,7 +32,16 @@ object Main extends App {
       extends ComplexNumberSpec
       with ComplexNumberAdd
       with ComplexNumberMult {
-    def eval(coeffs: List[ComplexNumberEval]): ComplexNumberSpec = ???
+    def eval(coeffs: List[ComplexNumberEval]): ComplexNumberSpec = {
+      def pow(degree: Int): ComplexNumberSpec = degree match {
+        case 0 => makeRectangular(1, 0)
+        case _ => mult(pow(degree - 1))
+      }
+      
+      val polynomial = coeffs.zipWithIndex.map(pair => pair._1.mult(pow(pair._2)))
+      val (real, imaginary) = polynomial.foldLeft((0.0, 0.0))((sum, complex) => (sum._1 + complex.real, sum._2 + complex.imaginary))
+      makeRectangular(real, imaginary) 
+    }
   }
 
   /*
@@ -47,7 +60,29 @@ object Main extends App {
       with ComplexNumberAdd
       with ComplexNumberMult
       with ComplexNumberEval {
-    // Fill in here.
-  }
+    // Fill in here. 
+    override val (real, imaginary) = {
+      if (isRectangular) {
+        (arg1, arg2) 
+      } else { 
+        ComplexNumberSpec.polarToRectangular(arg1, ComplexNumberSpec.normalizeAngle(arg2))
+      }
+    }
+    override val (magnitude, angle) = {
+      if (!isRectangular) {
+        (arg1, ComplexNumberSpec.normalizeAngle(arg2))
+      } else { 
+        val pair = ComplexNumberSpec.rectangularToPolar(arg1, arg2)
+        (pair._1, ComplexNumberSpec.normalizeAngle(pair._2)) 
+      }
+    }
 
+    override def makeRectangular(real: Double, imaginary: Double) = {
+      new ComplexNumberImpl(true, real, imaginary)
+    }
+
+    override def makePolar(magnitude: Double, angle: Double) = {
+      new ComplexNumberImpl(false, magnitude, angle)
+    }
+  }
 }

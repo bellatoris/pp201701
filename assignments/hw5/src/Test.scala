@@ -23,4 +23,13 @@ object Test extends App {
   val t1 = (new ComplexNumberImpl(true, 10, 0)).eval(List(one, one, one))
   print_result(t1.eqFunc(new ComplexNumberImpl(true, 111, 0)))
   //(1 + x + x^2)[x := 10] gives 111
+
+
+  val zero = new ComplexNumberImpl(true, 0, 0)
+  val i = new ComplexNumberImpl(true, 0, 1)
+  val negativeOne = new ComplexNumberImpl(true, -1, 0)
+  val t2 = new ComplexNumberImpl(true, 1, 0).eval(List(one, zero, i, negativeOne))
+  print_result(t2.eqFunc(new ComplexNumberImpl(true, 0, 1)))
+
+  //println(one.add(zero).add(i).add(negativeOne))
 }
