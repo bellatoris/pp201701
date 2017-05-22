@@ -65,7 +65,8 @@ object Main extends App {
       if (isRectangular) {
         (arg1, arg2) 
       } else { 
-        ComplexNumberSpec.polarToRectangular(arg1, ComplexNumberSpec.normalizeAngle(arg2))
+        ComplexNumberSpec.polarToRectangular(arg1, 
+          ComplexNumberSpec.normalizeAngle(arg2))
       }
     }
     override val (magnitude, angle) = {
