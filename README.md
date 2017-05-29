@@ -25,6 +25,7 @@
 - 05/03: [HW4](assignments/hw4) has changed little: the type of IterDictImpl.empty is changed from IterDict[K,V] to IterDictImpl[K,V]. (This is just for clarification. Not necessary to apply this to your homework, if you are already done without problems.)
 - 05/11: [HW5](assignments/hw5) is out. (Due date: 5/19(FRI) 23:59)
 - 05/11: Now [midterm result](http://147.46.219.145:8102) and [additional reduction](https://github.com/snu-sf-class/pp201701/issues/45) is valid. Claim until May 21 (Sun)
+- 05/29: [Project](project) is out. (Due date: 6/22(Thu) 23:59) Read the instruction [proj.pdf](project/proj.pdf) carefully.
 
 ##  Lecture slide updates (since 04/20)
 
