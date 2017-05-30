@@ -26,6 +26,7 @@
 - 05/11: [HW5](assignments/hw5) is out. (Due date: 5/19(FRI) 23:59)
 - 05/11: Now [midterm result](http://147.46.219.145:8102) and [additional reduction](https://github.com/snu-sf-class/pp201701/issues/45) is valid. Claim until May 21 (Sun)
 - 05/25: Final Exam schedule: June 16, 6:30pm ~ 11:30pm
+- 05/29: [Project](project) is out. (Due date: 6/22(Thu) 23:59) Read the instruction [proj.pdf](project/proj.pdf) carefully.
 
 ##  Lecture slide updates (since 04/20)
 
