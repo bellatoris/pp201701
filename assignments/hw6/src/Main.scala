@@ -19,7 +19,7 @@ import scala.math._
 
  */
 
-object Main extends App {
+object Main {
   /*
    HW6: Define Typeclasses for Real number, Complex number, and Polynomials.
    */
