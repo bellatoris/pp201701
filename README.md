@@ -32,6 +32,7 @@
 - 05/29: [Project](project) is out. (Due date: 6/22(Thu) 23:59) Read the instruction [proj.pdf](project/proj.pdf) carefully.
 - 06/01: Two lectures are left - 6/8(Thu) & 6/13(Tue). Final exam will cover materials taught until 6/8.
 - 06/01: Two homework assignments left. HW6(6/1 ~ 6/8) & HW7(6/8 ~ 6/15)
+- 06/01: HW6 is out. (Due date: 6/8(Thu) 23:59)
 
 ##  Lecture slide updates (since 04/20)
 
@@ -58,6 +59,7 @@
 | 3 | 04/07     	|04/14 23:59    | Polymorphism                                                            	|
 | 4 | 04/27     	|05/05 23:59    | Abstract classes                                                            	|
 | 5 | 05/11     	|05/19 23:59    | Trait Mixin                                                            	|
+| 6 | 06/01     	|06/08 23:59    | Typeclasses                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
