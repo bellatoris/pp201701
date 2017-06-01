@@ -9,6 +9,8 @@
 
 - 03/02: Lecture slide is uploaded [here](lecture.pdf).
 - Lecture on March 7th will be a practice session. Click [this](https://github.com/snu-sf-class/pp201701/issues/1) for more information
+- Old announcements are hidden (go to https://raw.githubusercontent.com/snu-sf-class/pp201701/master/README.md to check them)
+<!--
 - 03/16: [HW1](assignments/hw1) is out. (Due date: 3/24(FRI) 23:59) [Instruction for submission](HWInstruction.md)
 - 03/27: [HW1 solution](assignments-sol/hw1) is available. You can check your score at the server. For questions, email TA.
 - 03/30: [HW2](assignments/hw2) is out. (Due date: 4/7(FRI) 23:59)
@@ -24,9 +26,12 @@
 - 04/27: [HW4](assignments/hw4) is out. (Due date: 5/5(FRI) 23:59)
 - 05/03: [HW4](assignments/hw4) has changed little: the type of IterDictImpl.empty is changed from IterDict[K,V] to IterDictImpl[K,V]. (This is just for clarification. Not necessary to apply this to your homework, if you are already done without problems.)
 - 05/11: [HW5](assignments/hw5) is out. (Due date: 5/19(FRI) 23:59)
+-->
 - 05/11: Now [midterm result](http://147.46.219.145:8102) and [additional reduction](https://github.com/snu-sf-class/pp201701/issues/45) is valid. Claim until May 21 (Sun)
 - 05/25: Final Exam schedule: June 16, 6:30pm ~ 11:30pm
 - 05/29: [Project](project) is out. (Due date: 6/22(Thu) 23:59) Read the instruction [proj.pdf](project/proj.pdf) carefully.
+- 06/01: Two lectures are left - 6/8(Thu) & 6/13(Tue). Final exam will cover materials taught until 6/8.
+- 06/01: Two homework assignments left. HW6(6/1 ~ 6/8) & HW7(6/8 ~ 6/15)
 
 ##  Lecture slide updates (since 04/20)
 
