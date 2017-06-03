@@ -12,4 +12,8 @@ object Test extends App {
   val b = Complex.makeRectangular(3, 3)
   val apb = implicitly[AddOp[Complex]].op(a, b)
   print_result(Real.equals(apb.magnitude, 5.0))
+
+  val poly = List[Real](3, 4, 5) 
+  println(implicitly[AddOp[Polynomial[Real]]].op(poly, poly))
+  println(implicitly[MultOp[Polynomial[Real]]].op(poly, poly))
 }
