@@ -36,6 +36,7 @@
 - 06/06: Check new [HW3 score](https://github.com/snu-sf-class/pp201701/issues/52)! Send email to TA for questions/claims.
 - 06/08: Homework deadline changed: HW7(6/8 ~ 6/14(Wed))
 - 06/08: Homework deadline changed: HW6(6/1 ~ 6/9(Fri))
+- 06/08: [HW7](assignments/hw7) is out!
 
 ##  Lecture slide updates (since 04/20)
 
@@ -65,6 +66,7 @@
 | 4 | 04/27     	|05/05 23:59    | Abstract classes                                                            	|
 | 5 | 05/11     	|05/19 23:59    | Trait Mixin                                                            	|
 | 6 | 06/01     	|~~06/08~~ 06/09 23:59    | Typeclasses                                                            	|
+| 7 | 06/08     	|06/14 23:59    | Typeclass into OO                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
