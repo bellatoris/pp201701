@@ -31,9 +31,10 @@
 - 05/25: Final Exam schedule: June 16, 6:30pm ~ 11:30pm
 - 05/29: [Project](project) is out. (Due date: 6/22(Thu) 23:59) Read the instruction [proj.pdf](project/proj.pdf) carefully.
 - 06/01: Two lectures are left - 6/8(Thu) & 6/13(Tue). No class on 6/15. Final exam will cover materials taught until 6/8.
-- 06/01: Two homework assignments left. HW6(6/1 ~ 6/8) & HW7(6/8 ~ 6/15)
+- 06/01: Two homework assignments left. HW6(6/1 ~ 6/8) & ~~HW7(6/8 ~ 6/15)~~
 - 06/01: HW6 is out. (Due date: 6/8(Thu) 23:59)
 - 06/06: Check new [HW3 score](https://github.com/snu-sf-class/pp201701/issues/52)! Send email to TA for questions/claims.
+- 06/08: Homework deadline changed: HW7(6/8 ~ 6/14(Wed))
 
 ##  Lecture slide updates (since 04/20)
 
@@ -46,6 +47,7 @@
 | 5 | 05/24		|
 | 6 | 05/25             |
 | 7 | 06/03             |
+| 8 | 06/08             |
 | - | -             |
 
 ## Assignments
