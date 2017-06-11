@@ -66,12 +66,13 @@ object DataBundle {
   }
 
   // Primes
-  class Primes private (val prime:Int, protected val primes:List[Int])
-  { def this() = this(3, List (3))
+  class Primes private (val prime:Int, protected val primes:List[Int]) { 
+    def this() = this(3, List (3))
     def getNext: Primes = {
       val p = computeNextPrime(prime + 2)
       new Primes(p, primes ++ (p :: Nil ))
     }
+
     private def computeNextPrime(n: Int) : Int =
       if (primes.forall((p:Int) => n%p != 0)) n
       else computeNextPrime(n+2)

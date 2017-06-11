@@ -84,14 +84,7 @@ object Main {
   object Polynomial {
     def eval[A](poly: Polynomial[A], a: A)(implicit multProxy : MultOp[A], addProxy : AddOp[A]) : A = poly match {
       case Nil => addProxy.identity
-      case _ => {
-        def power(pow: Int): A = pow match {
-          case 0 => multProxy.identity
-          case _ => multProxy.op(a, power(pow - 1))
-        }
-        poly.zipWithIndex.foldLeft(addProxy.identity)((sum, pair) => 
-                        addProxy.op(sum, multProxy.op(pair._1, power(pair._2))))
-      }
+      case c :: tl => addProxy.op(c, multProxy.op(a, eval(tl, a)(multProxy, addProxy)))
     }
   }
 
