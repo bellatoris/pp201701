@@ -66,7 +66,7 @@
 | 4 | 04/27     	|05/05 23:59    | Abstract classes                                                            	|
 | 5 | 05/11     	|05/19 23:59    | Trait Mixin                                                            	|
 | 6 | 06/01     	|~~06/08~~ 06/09 23:59    | Typeclasses                                                            	|
-| 7 | 06/08     	|06/14 23:59    | Typeclass into OO                                                            	|
+| 7 | 06/08     	|~~06/14~~ 06/15 23:59    | Typeclass into OO                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
