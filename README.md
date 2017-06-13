@@ -37,7 +37,7 @@
 - 06/08: ~~Homework deadline changed: HW7(6/8 ~ 6/14(Wed))~~
 - 06/08: Homework deadline changed: HW6(6/1 ~ 6/9(Fri))
 - 06/08: [HW7](assignments/hw7) is out!
-- 06/09: HW7 deadline postponed to 6/16(Thu) 23:59. For questions about HW7, visit TA in 14:00 ~ 16:00 of 6/14 (Wed), (Place: 301-416).
+- 06/09: HW7 deadline postponed to 6/15(Thu) 23:59. For questions about HW7, visit TA in 14:00 ~ 16:00 of 6/14 (Wed), (Place: 301-416).
 
 ##  Lecture slide updates (since 04/20)
 
