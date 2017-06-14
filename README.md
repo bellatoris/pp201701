@@ -40,6 +40,7 @@
 - 06/13: HW7 deadline postponed to 6/15(Thu) 23:59. For questions about HW7, visit TA in 14:00 ~ 16:00 of 6/14 (Wed), (Place: 301-416).
 - 06/14: Fixed confusing comments in HW7/Test.scala. This doesn't alter the assignment.
 - 06/14: [HW6 solution](assignments-sol/hw6) uploaded.
+- 06/14: [Midterm Prob6 solution](assignments-sol/mid6) uploaded, by request. Not related to the Final exam.
 
 ##  Lecture slide updates (since 04/20)
 
