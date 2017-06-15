@@ -41,6 +41,7 @@
 - 06/14: Fixed confusing comments in HW7/Test.scala. This doesn't alter the assignment.
 - 06/14: [HW6 solution](assignments-sol/hw6) uploaded.
 - 06/14: [Midterm Prob6 solution](assignments-sol/mid6) uploaded, by request. Not related to the Final exam.
+- 06/16: [HW7 solution](assignments-sol/hw7) is uploaded. (Reminder: this is just one of the possible ways to solve this problem.)
 
 ##  Lecture slide updates (since 04/20)
 
