@@ -37,7 +37,11 @@
 - 06/08: ~~Homework deadline changed: HW7(6/8 ~ 6/14(Wed))~~
 - 06/08: Homework deadline changed: HW6(6/1 ~ 6/9(Fri))
 - 06/08: [HW7](assignments/hw7) is out!
-- 06/09: HW7 deadline postponed to 6/16(Thu) 23:59. For questions about HW7, visit TA in 14:00 ~ 16:00 of 6/14 (Wed), (Place: 301-416).
+- 06/13: HW7 deadline postponed to 6/15(Thu) 23:59. For questions about HW7, visit TA in 14:00 ~ 16:00 of 6/14 (Wed), (Place: 301-416).
+- 06/14: Fixed confusing comments in HW7/Test.scala. This doesn't alter the assignment.
+- 06/14: [HW6 solution](assignments-sol/hw6) uploaded.
+- 06/14: [Midterm Prob6 solution](assignments-sol/mid6) uploaded, by request. Not related to the Final exam.
+- 06/16: [HW7 solution](assignments-sol/hw7) is uploaded. (Reminder: this is just one of the possible ways to solve this problem.)
 
 ##  Lecture slide updates (since 04/20)
 
@@ -52,6 +56,7 @@
 | 7 | 06/03             |
 | 8 | 06/08             |
 | 9 | 06/13             |
+| 9 | 06/15             |
 | - | -             |
 
 ## Assignments

@@ -19,10 +19,10 @@ object Test extends App {
   println(pretty_printer(report3))
 
   val report4 = get_report(true, 20)
-  // print_result(pretty_printer(report4) == "<Primes 20>\n * 1 : 3\n * 2 : 5\n")
+  // print_result(pretty_printer(report4) == "<Primes 20>\n * 1-th prime : 3\n * 2-th-prime : 5\n ... \n")
   println(pretty_printer(report4))
 
   val report5 = get_report(false, 20)
-  // print_result(pretty_printer(report5) == "<Pi 20>\n * 1 : 1\n * 2 : 4\n * 3 : 1\n")
+  // print_result(pretty_printer(report5) == "<Pi 20>\n * 1-th digit : 1\n * 2-th digit : 4\n * 3-th digit : 1\n ... \n")
   println(pretty_printer(report5))
 }
