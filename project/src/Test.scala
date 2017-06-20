@@ -104,6 +104,17 @@ object Test extends App {
         }
         print_result(res)
       }
+
+      {
+        val code = "(let ((def f 3)) f)"
+        val res = conv.toInt(run_myeval(code)) 
+        println(res)
+      }
+      {
+        val code = "(let ((val a 3)) (let ((def f a) (val a 4)) f ))"
+        val res = conv.toInt(run_myeval(code))
+        println(res)
+      }
     } catch {
       case e : LexerException =>
         println("Lexer failed: " + e.msg)
