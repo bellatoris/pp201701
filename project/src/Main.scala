@@ -141,8 +141,7 @@ object Main {
   def appToVal(env: Environment, ef: Expr, eargs: List[Expr]): Val = { 
     @tailrec
     def tail(env: Environment, ef: Expr, eargs: List[Expr]): (Environment, Expr) = {
-      val fun = environmentEval(env, ef)(false)
-      fun match {
+      environmentEval(env, ef)(false) match {
         case VFun(funEnv, fname, memo, params, eb) => {
           val args = eargs.map(expr => environmentEval(env, expr)(false))
           val newEnv = funEnv.newEnv
@@ -150,24 +149,33 @@ object Main {
           params.zip(args).foreach(arg => addBind(newEnv, arg))
 
           @tailrec
-          def ifElse(env: Environment, expr: Expr): Expr = expr match {
+          def ifLet(env: Environment, expr: Expr): (Environment, Expr) = expr match {
             case EIf(econd, et, ef) => environmentEval(env, econd)(false) match {
-              case VTrue() => et match {
-                case EIf(econd, et2, ef2) => ifElse(env, et)
-                case _ => et
-              }
-              case VFalse() => ef match {
-                case EIf(econd, et2, ef2) => ifElse(env, ef)
-                case _ => ef
-              }
+              case VTrue() => ifLet(env, et) 
+              case VFalse() => ifLet(env, ef)
               case _ => throw new EvalException("Not Boolean Expression")
             }
-            case _ => expr
+            case ELet(bs, eb) => {
+              val newEnv = env.newEnv
+              bs.foreach(bind => bind match {
+                  case (BDEF(), str, expr) => expr match {
+                    case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
+                    case _ => addBind(newEnv, (str, VExpr(newEnv, expr)))
+                  }
+                  case (BVAL(), str, expr) => expr match {
+                    case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
+                    case _ => addBind(newEnv, (str, environmentEval(newEnv, expr)(false)))
+                  }
+              })
+              ifLet(newEnv, eb)
+            }
+            case _ => (env, expr)
           }
 
-          ifElse(newEnv, eb) match {
-             case EApp(ef, eargs) => tail(newEnv, ef, eargs) 
-             case _ => (newEnv, eb)
+          val result = ifLet(newEnv, eb) 
+          result._2 match {
+             case EApp(ef, eargs) => tail(result._1, ef, eargs) 
+             case _ => (result._1, eb)
           }
         }
         case _ => throw new EvalException("Not Function")
@@ -179,7 +187,7 @@ object Main {
   }
 
   def appToValMemo(env: Environment, ef: Expr, eargs: List[Expr]): Val = environmentEval(env, ef)(true) match {
-    case VFun(funEnv, fname, memo, params, eb) => {
+    case VFun(funEnv, fname, memo, params, eb) if fname != "" => {
       val args = eargs.map(expr => environmentEval(env, expr)(true))
       memo.get(args) match {
         case Some(v) => v
@@ -212,7 +220,7 @@ object Main {
           case _ => addBind(newEnv, (str, VExpr(newEnv, expr)))
         }
         case (BVAL(), str, expr) => expr match {
-          case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMa[List[Val], Val](), params, eb)))
+          case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
           case _ => addBind(newEnv, (str, environmentEval(newEnv, expr)))
         }
     })
