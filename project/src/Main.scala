@@ -33,13 +33,23 @@ object Value {
     }
   }
 
+  def deleteBind(env: Environment, key: String): Environment = env match {
+    case EmptyEnv() => {
+      env 
+    }
+    case NonEmptyEnv(table, prior) => {
+      table -= key
+      env
+    }
+  }
+
   sealed abstract class Val
   case class VInt(n: Int) extends Val
   case class VTrue() extends Val
   case class VFalse() extends Val
   case class VNil() extends Val
   case class VCons(h: Val, t: Val) extends Val
-  case class VFun(env: Environment, params: List[String], expr: Expr) extends Val
+  case class VFun(env: Environment, fname: String, memo: HashMap[List[Val], Val], params: List[String], expr: Expr) extends Val
   case class VError() extends Val
   case class VExpr(env: Environment, expr: Expr) extends Val
 
@@ -70,7 +80,7 @@ object Value {
       case _ => false
     }
     def isFun(a: Val): Boolean = a match {
-      case VFun(env, params, expr) => true
+      case VFun(env, fname, memo, params, expr) => true
       case _ => false
     }
   }
@@ -82,27 +92,27 @@ object Main {
   class EvalException(val msg: String) extends Exception
 
   // to Value method
-  def constToVal(c: Const): Val = c match {
+  def constToVal(c: Const)(implicit memo: Boolean): Val = c match {
     case CInt(n: Int) => VInt(n)
     case CTrue() => VTrue()
     case CFalse() => VFalse()
     case CNil() => VNil()
   }
 
-  def nameToVal(env: Environment, x: String): Val = env.find(x) match {
+  def nameToVal(env: Environment, x: String)(implicit memo: Boolean): Val = env.find(x) match {
     case VExpr(env, expr) => environmentEval(env, expr)
     case VError() => throw new EvalException("There is no bind")
     case _ @ value => value
   }
 
-  def ifToVal(env: Environment, econd: Expr, et: Expr, ef: Expr): Val = 
+  def ifToVal(env: Environment, econd: Expr, et: Expr, ef: Expr)(implicit memo: Boolean): Val = 
   environmentEval(env, econd) match {
     case VTrue() => environmentEval(env, et)
     case VFalse() => environmentEval(env, ef)
     case _ => throw new EvalException("Not Boolean Expression")
   }
 
-  def consToVal(env: Environment, eh: Expr, et: Expr): Val = {
+  def consToVal(env: Environment, eh: Expr, et: Expr)(implicit memo: Boolean): Val = {
     val head = environmentEval(env, eh)
     val tail = environmentEval(env, et)
     tail match {
@@ -112,85 +122,148 @@ object Main {
     }
   }
 
-  def headToVal(env: Environment, el: Expr): Val = environmentEval(env, el) match {
+  def headToVal(env: Environment, el: Expr)(implicit memo: Boolean): Val = environmentEval(env, el) match {
     case VCons(hd, tl) => hd
     case VNil() => throw new EvalException("head of empty pair")
     case _ => throw new EvalException("Not pair")
   }
 
-  def tailToVal(env: Environment, el: Expr): Val = environmentEval(env, el) match {
+  def tailToVal(env: Environment, el: Expr)(implicit memo: Boolean): Val = environmentEval(env, el) match {
     case VCons(hd, tl) => tl
     case VNil() => throw new EvalException("tail of empty list")
     case _ => throw new EvalException("Not pair")
   }
 
-  def funToVal(env: Environment, params: List[String], eb: Expr): Val = {
-    VFun(env, params, eb)
+  def funToVal(env: Environment, params: List[String], eb: Expr)(implicit memo: Boolean): Val = {
+    VFun(env, "", HashMap[List[Val], Val](), params, eb)
   }
 
-  def appToVal(env: Environment, ef: Expr, eargs: List[Expr]): Val = 
-  environmentEval(env, ef) match {
-    case VFun(funEnv, params, eb) => {
-      if (params.length != eargs.length) {
-        throw new EvalException("Arguments' length does not match with parameter")
-      } else {
-        val args = eargs.map(expr => environmentEval(env, expr))
-        val newEnv = funEnv.newEnv
-        
-        params.zip(args).foreach(arg => addBind(newEnv, arg))
-        environmentEval(newEnv, eb)
+  def appToVal(env: Environment, ef: Expr, eargs: List[Expr]): Val = { 
+    @tailrec
+    def tail(env: Environment, ef: Expr, eargs: List[Expr]): (Environment, Expr) = {
+      environmentEval(env, ef)(false) match {
+        case VFun(funEnv, fname, memo, params, eb) => {
+          val args = eargs.map(expr => environmentEval(env, expr)(false))
+          val newEnv = funEnv.newEnv
+          
+          params.zip(args).foreach(arg => addBind(newEnv, arg))
+
+          @tailrec
+          def ifLet(env: Environment, expr: Expr): (Environment, Expr) = expr match {
+            case EIf(econd, et, ef) => environmentEval(env, econd)(false) match {
+              case VTrue() => ifLet(env, et) 
+              case VFalse() => ifLet(env, ef)
+              case _ => throw new EvalException("Not Boolean Expression")
+            }
+            case ELet(bs, eb) => {
+              val newEnv = env.newEnv
+              bs.foreach(bind => bind match {
+                  case (BDEF(), str, expr) => expr match {
+                    case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
+                    case _ => addBind(newEnv, (str, VExpr(newEnv, expr)))
+                  }
+                  case (BVAL(), str, expr) => expr match {
+                    case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
+                    case _ => addBind(newEnv, (str, environmentEval(newEnv, expr)(false)))
+                  }
+              })
+              ifLet(newEnv, eb)
+            }
+            case _ => (env, expr)
+          }
+
+          val result = ifLet(newEnv, eb) 
+          result._2 match {
+             case EApp(ef, eargs) => tail(result._1, ef, eargs) 
+             case _ => (result._1, eb)
+          }
+        }
+        case _ => throw new EvalException("Not Function")
+      }
+    }
+
+    val (newEnv, eb) = tail(env, ef, eargs)
+    environmentEval(newEnv, eb)(false)
+  }
+
+  def appToValMemo(env: Environment, ef: Expr, eargs: List[Expr]): Val = environmentEval(env, ef)(true) match {
+    case VFun(funEnv, fname, memo, params, eb) if fname != "" => {
+      val args = eargs.map(expr => environmentEval(env, expr)(true))
+      memo.get(args) match {
+        case Some(v) => v
+        case None => {
+          val newEnv = funEnv.newEnv
+
+          params.zip(args).foreach(arg => addBind(newEnv, arg))
+          val result = environmentEval(newEnv, eb)(true)
+          val newMemo = funEnv.find(fname) match {
+            case VFun(env, n, m, p, e) => m + (args -> result)
+            case _ => throw new EvalException("Never be happened")
+          }
+          
+          deleteBind(funEnv, fname)
+          addBind(funEnv, (fname, VFun(funEnv, fname, newMemo, params, eb)))
+          result
+        }
       }
     }
     case _ => throw new EvalException("Not Function")
   }
 
-  def letToVal(env: Environment, bs: List[Bind], eb: Expr): Val = {
+
+  def letToVal(env: Environment, bs: List[Bind], eb: Expr)(implicit memo: Boolean): Val = {
     val newEnv = env.newEnv
    
     bs.foreach(bind => bind match {
-        case (BDEF(), str, expr) => addBind(newEnv, (str, VExpr(newEnv, expr)))
-        case (BVAL(), str, expr) => addBind(newEnv, (str, environmentEval(newEnv, expr)))
+        case (BDEF(), str, expr) => expr match {
+          case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
+          case _ => addBind(newEnv, (str, VExpr(newEnv, expr)))
+        }
+        case (BVAL(), str, expr) => expr match {
+          case EFun(params, eb) => addBind(newEnv, (str, VFun(newEnv, str, HashMap[List[Val], Val](), params, eb)))
+          case _ => addBind(newEnv, (str, environmentEval(newEnv, expr)))
+        }
     })
 
     environmentEval(newEnv, eb)
   }
 
-  def addToVal(env: Environment, e1: Expr, e2: Expr): Val = {
+  def addToVal(env: Environment, e1: Expr, e2: Expr)(implicit memo: Boolean): Val = {
     (environmentEval(env, e1), environmentEval(env, e2)) match {
       case (VInt(n), VInt(m)) => VInt(n + m)
       case _ => throw new EvalException("Not Integer")
     }
   }
 
-  def subToVal(env: Environment, e1: Expr, e2: Expr): Val = {
+  def subToVal(env: Environment, e1: Expr, e2: Expr)(implicit memo: Boolean): Val = {
     (environmentEval(env, e1), environmentEval(env, e2)) match {
       case (VInt(n), VInt(m)) => VInt(n - m)
       case _ => throw new EvalException("Not Integer")
     }
   }
 
-  def multToVal(env: Environment, e1: Expr, e2: Expr): Val = {
+  def multToVal(env: Environment, e1: Expr, e2: Expr)(implicit memo: Boolean): Val = {
     (environmentEval(env, e1), environmentEval(env, e2)) match {
       case (VInt(n), VInt(m)) => VInt(n * m)
       case _ => throw new EvalException("Not Integer")
     }
   }
 
-  def equalToVal(env: Environment, e1: Expr, e2: Expr): Val = {
+  def equalToVal(env: Environment, e1: Expr, e2: Expr)(implicit memo: Boolean): Val = {
     (environmentEval(env, e1), environmentEval(env, e2)) match {
       case (VInt(n), VInt(m)) => if (n == m) VTrue() else VFalse()
       case _ => throw new EvalException("Not Integer")
     }
   }
 
-  def lessToVal(env: Environment, e1: Expr, e2: Expr): Val = {
+  def lessToVal(env: Environment, e1: Expr, e2: Expr)(implicit memo: Boolean): Val = {
     (environmentEval(env, e1), environmentEval(env, e2)) match {
       case (VInt(n), VInt(m)) => if (n < m) VTrue() else VFalse()
       case _ => throw new EvalException("Not Integer")
     }
   }
 
-  def greaterToVal(env: Environment, e1: Expr, e2: Expr): Val = {
+  def greaterToVal(env: Environment, e1: Expr, e2: Expr)(implicit memo: Boolean): Val = {
     (environmentEval(env, e1), environmentEval(env, e2)) match {
       case (VInt(n), VInt(m)) => if (n > m) VTrue() else VFalse()
       case _ => throw new EvalException("Not Integer")
@@ -198,11 +271,10 @@ object Main {
   }
 
   def myeval(e:Expr) : Val =  {
-    environmentEval(EmptyEnv(), e)
+    environmentEval(EmptyEnv(), e)(false)
   }
 
-  @tailrec
-  def environmentEval(env: Environment, e: Expr): Val = e match {
+  def environmentEval(env: Environment, e: Expr)(implicit memo: Boolean): Val = e match {
     case EConst(c) => constToVal(c)
     case EName(x) => nameToVal(env, x)
     case EIf(econd, et, ef) => ifToVal(env, econd, et, ef)
@@ -210,7 +282,7 @@ object Main {
     case EHd(el) => headToVal(env, el)
     case ETl(el) => tailToVal(env, el)
     case EFun(params, eb) => funToVal(env, params, eb)
-    case EApp(ef, eargs) => appToVal(env, ef, eargs)
+    case EApp(ef, eargs) => if (memo) appToValMemo(env, ef, eargs) else appToVal(env, ef, eargs)
     case ELet(bs, eb) => letToVal(env, bs, eb)
     case EPlus(e1, e2) => addToVal(env, e1, e2)
     case EMinus(e1, e2) => subToVal(env, e1, e2)
@@ -220,6 +292,8 @@ object Main {
     case EGt(e1, e2) => greaterToVal(env, e1, e2)
   }
 
-  def myeval_memo(e:Expr) : Val = throw new EvalException("Not implemented yet")
+  def myeval_memo(e:Expr) : Val = {
+    environmentEval(EmptyEnv(), e)(true)
+  }
 
 }
