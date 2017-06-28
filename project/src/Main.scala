@@ -115,22 +115,25 @@ object Main {
   def consToVal(env: Environment, eh: Expr, et: Expr)(implicit memo: Boolean): Val = {
     val head = environmentEval(env, eh)
     val tail = environmentEval(env, et)
+    VCons(head, tail)
+    /*
     tail match {
       case VCons(hd, tl) => VCons(head, tail)
       case VNil() => VCons(head, VNil())
       case _ => VCons(head, VCons(tail, VNil()))
     }
+    */
   }
 
   def headToVal(env: Environment, el: Expr)(implicit memo: Boolean): Val = environmentEval(env, el) match {
     case VCons(hd, tl) => hd
-    case VNil() => throw new EvalException("head of empty pair")
+    //case VNil() => throw new EvalException("head of empty pair")
     case _ => throw new EvalException("Not pair")
   }
 
   def tailToVal(env: Environment, el: Expr)(implicit memo: Boolean): Val = environmentEval(env, el) match {
     case VCons(hd, tl) => tl
-    case VNil() => throw new EvalException("tail of empty list")
+    // case VNil() => throw new EvalException("tail of empty list")
     case _ => throw new EvalException("Not pair")
   }
 

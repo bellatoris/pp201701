@@ -115,6 +115,21 @@ object Test extends App {
         val res = conv.toInt(run_myeval(code))
         println(res)
       }
+      {
+        val code = "(hd (tl (cons true (cons 3 nil))))"
+        val res = conv.toInt(run_myeval(code))
+        println(res)
+      }
+      {
+        val code = "(cons true false)"
+        val res = conv.toPair(run_myeval(code))
+        println(res)
+      }
+      {
+        val code = "(if (hd (cons (= (+ 3 5) (* 2 4)) false)) (if (tl (cons (= (+ 3 5) (* 2 4)) false)) (> 3 5) (< 3 5)) false)"
+        val res = conv.toBool(run_myeval(code))
+        println(res)
+      }
     } catch {
       case e : LexerException =>
         println("Lexer failed: " + e.msg)
