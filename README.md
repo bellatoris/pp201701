@@ -29,7 +29,7 @@
 -->
 - 05/11: Now [midterm result](http://147.46.219.145:8102) and [additional reduction](https://github.com/snu-sf-class/pp201701/issues/45) is valid. Claim until May 21 (Sun)
 - 05/25: Final Exam schedule: June 16, 6:30pm ~ 11:30pm
-- 05/29: [Project](project) is out. (Due date: 6/22(Thu) 23:59) Read the instruction [proj.pdf](project/proj.pdf) carefully.
+- 05/29: [Project](project) is out. (~~Due date: 6/22(Thu) 23:59~~) Read the instruction [proj.pdf](project/proj.pdf) carefully.
 - 06/01: Two lectures are left - 6/8(Thu) & 6/13(Tue). No class on 6/15. Final exam will cover materials taught until 6/8.
 - 06/01: Two homework assignments left. ~~HW6(6/1 ~ 6/8) & HW7(6/8 ~ 6/15)~~
 - 06/01: HW6 is out. (Due date: 6/8(Thu) 23:59)
@@ -44,6 +44,9 @@
 - 06/16: [HW7 solution](assignments-sol/hw7) is uploaded. (Reminder: this is just one of the possible ways to solve this problem.)
 - 06/21: Fixed a typo in the project document. (see [here](https://github.com/snu-sf-class/pp201701/issues/70)for more information.)
 - 06/21: [`proj-lib2116.jar`](https://github.com/snu-sf-class/pp201701/tree/master/project/lib) for Scala 2.11.6 is uploaded. If you're using Scala 2.11.6, download the new file and change the name into `proj-lib.jar`
+- 06/22: Project due date postponed to 06/25(Sun) 23:59.
+- 06/26: Check your final score [here](http://sf.snu.ac.kr:8103)
+- 06/26: Your final grade ~~will be~~ IS NOW individually announced on the [HW submission page](http://sf.snu.ac.kr:8101) ~~tomorrow~~. Check details from [here](https://github.com/snu-sf-class/pp201701/issues/83). The claim period is until next Tuesday.
 - 06/29: Check the [project solution](project-sol/) and the [final exam solution](final-sol/).
 
 ##  Lecture slide updates (since 04/20)
@@ -59,7 +62,7 @@
 | 7 | 06/03             |
 | 8 | 06/08             |
 | 9 | 06/13             |
-| 9 | 06/15             |
+| 10 | 06/15             |
 | - | -             |
 
 ## Assignments
@@ -77,6 +80,7 @@
 | 5 | 05/11     	|05/19 23:59    | Trait Mixin                                                            	|
 | 6 | 06/01     	|~~06/08~~ 06/09 23:59    | Typeclasses                                                            	|
 | 7 | 06/08     	|~~06/14~~ 06/15 23:59    | Typeclass into OO                                                            	|
+| prj | 05/29     	|~~06/22~~ 06/25 23:59    | Project                                                            	|
 | - | -             | -             | - |
 
 ## Must Read
