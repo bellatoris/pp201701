@@ -48,6 +48,7 @@
 - 06/26: Check your final score [here](http://sf.snu.ac.kr:8103)
 - 06/26: Your final grade ~~will be~~ IS NOW individually announced on the [HW submission page](http://sf.snu.ac.kr:8101) ~~tomorrow~~. Check details from [here](https://github.com/snu-sf-class/pp201701/issues/83). The claim period is until next Tuesday.
 - 06/29: Check the [project solution](project-sol/) and the [final exam solution](final-sol/).
+- 06/29: Check the UPDATED on the [HW submission page](http://sf.snu.ac.kr:8101) 
 
 ##  Lecture slide updates (since 04/20)
 
