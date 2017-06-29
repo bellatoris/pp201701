@@ -44,6 +44,7 @@
 - 06/16: [HW7 solution](assignments-sol/hw7) is uploaded. (Reminder: this is just one of the possible ways to solve this problem.)
 - 06/21: Fixed a typo in the project document. (see [here](https://github.com/snu-sf-class/pp201701/issues/70)for more information.)
 - 06/21: [`proj-lib2116.jar`](https://github.com/snu-sf-class/pp201701/tree/master/project/lib) for Scala 2.11.6 is uploaded. If you're using Scala 2.11.6, download the new file and change the name into `proj-lib.jar`
+- 06/29: Check the [project solution](project-sol/) and the [final exam solution](final-sol/).
 
 ##  Lecture slide updates (since 04/20)
 
